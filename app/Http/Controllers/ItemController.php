@@ -2,38 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreItemRequest;
+use App\Http\Requests\UpdateItemRequest;
+use App\Services\ItemService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 
 class ItemController extends Controller
 {
-    public function index()
+    protected ItemService $svc;
+
+    public function __construct(ItemService $svc)
     {
-        return response()->json(Item::with('category')->get());
+        $this->svc = $svc;
     }
 
-    public function store(Request $request)
+    public function index(): JsonResponse
     {
-        $item = Item::create($request->all());
-        return response()->json($item, 201);
+        return response()->json([
+            'status' => 'success',
+            'data' => $this->svc->all(),
+            'message' => 'Berhasil menarik semua data Item'
+        ]);
     }
 
-    public function show($id)
+    public function store(StoreItemRequest $req): JsonResponse
     {
-        $item = Item::with('category')->findOrFail($id);
-        return response()->json($item);
+        $item = $this->svc->create($req->validated());
+        
+        return response()->json([
+            'status' => 'success',
+            'data' => $item,
+            'message' => 'Item berhasil dibuat'
+        ], 201);
     }
 
-    public function update(Request $request, $id)
+    public function show($id): JsonResponse
     {
-        $item = Item::findOrFail($id);
-        $item->update($request->all());
-        return response()->json($item);
+        try {
+            $item = $this->svc->find($id);
+            
+            return response()->json([
+                'status' => 'success',
+                'data' => $item,
+                'message' => 'Berhasil menarik satu data Item'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'data' => null,
+                'message' => $e->getMessage()
+            ], 404);
+        }
     }
 
-    public function destroy($id)
+    public function update(UpdateItemRequest $req, $id): JsonResponse
     {
-        Item::destroy($id);
-        return response()->json(null, 204);
+        try {
+            $item = $this->svc->update($id, $req->validated());
+            
+            return response()->json([
+                'status' => 'success',
+                'data' => $item,
+                'message' => 'Item berhasil diperbarui'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'data' => null,
+                'message' => $e->getMessage()
+            ], 404);
+        }
+    }
+
+    public function destroy($id): JsonResponse
+    {
+        try {
+            $this->svc->delete($id);
+            
+            return response()->json([
+                'status' => 'success',
+                'data' => null,
+                'message' => 'Item berhasil dihapus'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'data' => null,
+                'message' => $e->getMessage()
+            ], 404);
+        }
     }
 }
