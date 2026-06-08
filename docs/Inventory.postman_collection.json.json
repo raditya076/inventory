@@ -1,0 +1,457 @@
+{
+  "info": {
+    "_postman_id": "ca2009be-1caf-444f-8467-4a167dc04061",
+    "name": "Inventory API v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54364723",
+    "_collection_link": "https://go.postman.co/collection/54364723-ca2009be-1caf-444f-8467-4a167dc04061?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Radit\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"qwerty1234\",\r\n    \"password_confirmation\": \"qwerty1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://inventory.test/api/v1/register",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"qwerty1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://inventory.test/api/v1/login",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /categories",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://inventory.test/api/v1/categories",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST /categories",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Elektronik\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://inventory.test/api/v1/categories",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /categories/{id}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://inventory.test/api/v1/categories/1",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT /categories/{id}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Elektronik\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://inventory.test/api/v1/categories/1",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /categories/{id} — token harus role admin",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://inventory.test/api/v1/categories/1",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /items",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://inventory.test/api/v1/items",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST /items",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Laptop\",\r\n    \"quantity\": 10,\r\n    \"price\": 15000000,\r\n    \"category_id\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://inventory.test/api/v1/items",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /items/{id}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://inventory.test/api/v1/items/1",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "items",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT /items/{id}",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Laptop\",\r\n    \"quantity\": 10,\r\n    \"price\": 15000000,\r\n    \"category_id\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://inventory.test/api/v1/items/1",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "items",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE /items/{id} — token harus role admin",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "13|dN7mQFNkA9JdJzHGjHvIt9IyPltiaGAmSvpaQXAI46dd92ab",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://inventory.test/api/v1/items/1",
+          "protocol": "http",
+          "host": [
+            "inventory",
+            "test"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "items",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
