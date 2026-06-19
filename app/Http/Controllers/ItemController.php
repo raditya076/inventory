@@ -20,14 +20,19 @@ class ItemController extends BaseController
 
     public function index(Request $request)
     {
-        $items = $this->svc
-            ->all()
-            ->filter(fn($item) =>
-                !$request->category_id
-                || $item->category_id == $request->category_id
-            );
+    $request->validate([
+        'category_id' => 'nullable|integer',
+    ]);
 
-        return $this->success($items->values(), 'Berhasil menarik semua data Item');
+    $items = collect($this->svc->all());
+
+    if ($request->filled('category_id')) {
+        $items = $items->filter(
+            fn($item) => $item->category_id == $request->category_id
+        )->values();
+    }
+
+    return $this->success($items, 'Berhasil menarik semua data Item');
     }
 
     public function store(StoreItemRequest $req)
