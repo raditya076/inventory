@@ -17,7 +17,7 @@ Route::prefix('v1')->group(function () {
     Route::post('login',    [AuthController::class, 'login']);
 
     // Protected routes (butuh token Sanctum)
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
 
         Route::get('/user', function (Request $request) {
             return $request->user();
@@ -31,12 +31,11 @@ Route::prefix('v1')->group(function () {
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])
             ->middleware('role:admin');
 
-        // Item routes (semua kecuali delete)
+        // Item routes
         Route::apiResource('items', ItemController::class)
             ->except(['destroy']);
 
-        // Item delete — hanya admin
-        Route::delete('items/{item}', [ItemController::class, 'destroy'])
-            ->middleware('role:admin');
+        // Item delete — pengecekan admin dilakukan di controller
+        Route::delete('items/{id}', [ItemController::class, 'destroy']);
     });
 });
