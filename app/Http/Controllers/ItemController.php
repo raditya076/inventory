@@ -20,24 +20,25 @@ class ItemController extends BaseController
 
     public function index(Request $request)
     {
-    $request->validate([
-        'category_id' => 'nullable|integer',
-    ]);
+        $request->validate([
+            'category_id' => 'nullable|integer',
+        ]);
 
-    $items = collect($this->svc->all());
+        $items = collect($this->svc->all());
 
-    if ($request->filled('category_id')) {
-        $items = $items->filter(
-            fn($item) => $item->category_id == $request->category_id
-        )->values();
-    }
+        if ($request->filled('category_id')) {
+            $items = $items->filter(
+                fn($item) => $item->category_id == $request->category_id
+            )->values();
+        }
 
-    return $this->success($items, 'Berhasil menarik semua data Item');
+        return $this->success($items, 'Berhasil menarik semua data Item');
     }
 
     public function store(StoreItemRequest $req)
     {
-        $item = $this->svc->create($req->validated());
+        $data = $req->validated();
+        $item = $this->svc->create($data);
         return $this->success($item, 'Item berhasil dibuat', 201);
     }
 
@@ -63,9 +64,13 @@ class ItemController extends BaseController
 
     public function destroy($id)
     {
+        if (auth()->user()->role !== 'admin') {
+            return $this->error('Forbidden', 403);
+        }
+
         try {
             $this->svc->delete($id);
-            return $this->success(null, 'Item berhasil dihapus', 204);
+            return response()->noContent();
         } catch (Exception $e) {
             return $this->error($e->getMessage(), 404);
         }
